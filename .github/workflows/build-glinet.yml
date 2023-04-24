@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       tag_main:
-        description: '请输入gl-inet/gl-infra-builder TAG'     
+        description: 'target_mt7981_gl-mt2500'     
         required: true
-        default: 'main' 
+        default: 'v4.2.0_release3' 
 
       device:
         description: '选择设备'     
         required: true
-        default: 'target_wlan_ap-gl-ax1800' 
+        default: 'target_mt7981_gl-mt2500' 
         type: choice
         options:
         - target_wlan_ap-gl-ax1800
@@ -29,13 +29,13 @@ on:
 
       ui:
         description: '是否包含官方UI (目前支持IPQ6018系列、mt7981系列、GL-A1300和GL-S200)'
-        required: false
+        required: true
         type: boolean
       
       tag_no:
-        description: '请输入gl-inet/glinet4.x TAG'     
+        description: 'target_mt7981_gl-mt2500'     
         required: true
-        default: 'main' 
+        default: 'v4.2.0_release3' 
         
 jobs:
   build:
@@ -50,8 +50,8 @@ jobs:
         sudo apt autoremove --purge
         sudo rm -rf /usr/share/dotnet
         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-        git config --global user.email "shi05275@163.com"
-        git config --global user.name "JiaY-shi"
+        git config --global user.email "ga456rnet@gmail.com"
+        git config --global user.name "ga456rnet"
     - name: make 
       run: |
         ./build.sh ~ ${{ inputs.device }} ${{ inputs.ui }} ${{ inputs.tag_main }} ${{ inputs.tag_no }}
